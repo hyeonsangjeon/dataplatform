@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="core-site">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../hadoop-example/conf/core-site.xml" />
+      <root url="file://$PROJECT_DIR$/../hadoop-example/conf/mapred-site.xml" />
+      <root url="file://$PROJECT_DIR$/../hadoop-example/conf/hdfs-site.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
