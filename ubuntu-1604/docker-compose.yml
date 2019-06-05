@@ -3,9 +3,9 @@ services:
   ubuntu1:
     image: modenaf360/ubuntu-1604:latest
     hostname: ubuntu1
-    environment:
-      USER: 'jhs'
-      USER_PW: '1234'
+#    environment:
+#      USER: 'jhs'
+#      USER_PW: '1234'
     stdin_open: true
     tty: true
     cpu_shares: 1024
@@ -13,9 +13,9 @@ services:
   ubuntu2:
     image: modenaf360/ubuntu-1604:latest
     hostname: ubuntu2
-    environment:
-      USER: 'jhs'
-      USER_PW: '1234'
+#    environment:
+#      USER: 'jhs'
+#      USER_PW: '1234'
     stdin_open: true
     tty: true
     cpu_shares: 1024
