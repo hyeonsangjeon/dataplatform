@@ -1,9 +1,6 @@
 FROM ubuntu:16.04
 LABEL maintainer="wingnut0310 <wingnut0310@gmail.com>"
 
-# Setup build environment for libpam
-RUN apt-get update -y
-
 
 # Install program
 RUN \

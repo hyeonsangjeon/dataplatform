@@ -36,5 +36,3 @@ then
 else
     /bin/bash -c "$*"
 fi
-
-su $USER
