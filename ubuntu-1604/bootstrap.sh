@@ -1,25 +1,22 @@
 #!/bin/bash
 
-# Create a user in the start up if NEW_USER environment variable is given
-# EX: docker run  -e NEW_USER=kmucs RSA_PUBLIC_KEY=  ...
-if [[ ! -z $NEW_USER ]];
-then
-    adduser --disabled-password --gecos ""  "$NEW_USER" > /dev/null
-    usermod -aG sudo "$NEW_USER" > /dev/null
-    sudo -u "$NEW_USER" mkdir /home/"$NEW_USER"/.ssh
-    sudo -u "$NEW_USER" chmod 700 /home/"$NEW_USER"/.ssh
-    sudo -u "$NEW_USER" touch /home/"$NEW_USER"/.ssh/authorized_keys
+# Create a user in the start up if USER environment variable is given
+# EX: docker run  -e USER=groot  USER_PW=iamuser
 
-    sudo echo "$NEW_USER:$NEW_USER" | chpasswd
 
-    if [[ ! -z $RSA_PUBLIC_KEY ]];
-    then
-        sudo -u "$NEW_USER" echo "$RSA_PUBLIC_KEY" >> /home/"$NEW_USER"/.ssh/authorized_keys
-    else
-        sudo -u "$NEW_USER" cat /tmp/id_rsa.pub >> /home/"$NEW_USER"/.ssh/authorized_keys
-    fi
-    sudo -u "$NEW_USER" chmod 600 /home/"$NEW_USER"/.ssh/authorized_keys
+#CREATE USER
+if [ ! -z $USER  -a  $USER != root ]; then
+    adduser --disabled-password --gecos ""  "$USER" > /dev/null
+    usermod -aG sudo "$USER" > /dev/null
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+fi
+
+
+#MODIFY PASSWD
+if [[ ! -z $USER_PW ]]; then
+    sudo echo "$USER:$USER_PW" | chpasswd
+else
+    sudo echo "$USER:$USER" | chpasswd
 fi
 
 /usr/sbin/sshd -D
@@ -34,3 +31,4 @@ else
     /bin/bash -c "$*"
 fi
 
+su $USER

@@ -1,21 +1,21 @@
 version: '2'
 services:
   ubuntu1:
-    image: kmubigdata/ubuntu-1604:latest
+    image: modenaf360/ubuntu-1604:latest
     hostname: ubuntu1
     environment:
-      NEW_USER: 'jhs'
-      RSA_PUBLIC_KEY: 'abcdefghijk'
+      USER: 'jhs'
+      USER_PW: '1234'
     stdin_open: true
     tty: true
     cpu_shares: 1024
 
   ubuntu2:
-    image: kmubigdata/ubuntu-1604:latest
+    image: modenaf360/ubuntu-1604:latest
     hostname: ubuntu2
     environment:
-      NEW_USER: 'jhs'
-      RSA_PUBLIC_KEY: 'abcdefghijk'
+      USER: 'jhs'
+      USER_PW: '1234'
     stdin_open: true
     tty: true
     cpu_shares: 1024
