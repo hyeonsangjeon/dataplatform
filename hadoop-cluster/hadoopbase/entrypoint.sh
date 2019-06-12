@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 #!/bin/bash
 
 # Set some sensible defaults
@@ -115,4 +114,15 @@ do
     wait_for_it ${i}
 done
 
+#수정필요
+namedir=`echo $HDFS_CONF_dfs_namenode_name_dir | perl -pe 's#file://##'`
+
+if [ "`ls -A $namedir --ignore='lost+found'`" == "" ]; then
+  echo "Formatting namenode name directory: $namedir"
+  $HADOOP_PREFIX/bin/hdfs --config $HADOOP_CONF_DIR namenode -format -nonInteractive -force $CLUSTER_NAME
+fi
+
+$HADOOP_PREFIX/bin/hdfs --config $HADOOP_CONF_DIR namenode
+
 exec $@
+

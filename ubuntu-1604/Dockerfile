@@ -33,6 +33,7 @@ COPY bootstrap.sh /etc/bootstrap.sh
 RUN chown root.root /etc/bootstrap.sh
 RUN chmod 700 /etc/bootstrap.sh
 
+
 ENTRYPOINT ["/etc/bootstrap.sh"]
 
 RUN service ssh start
