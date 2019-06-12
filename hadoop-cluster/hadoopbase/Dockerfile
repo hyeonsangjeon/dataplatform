@@ -1,7 +1,6 @@
 FROM modenaf360/ubuntu-1604
 LABEL maintainer="wingnut0310 <wingnut0310@gmail.com>"
 
-USER root
 # Install program
 RUN apt-get install -y curl openssh-server openssh-client rsync wget
 
@@ -64,5 +63,28 @@ ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 ENV HADOOP_PREFIX=$HADOOP_HOME
 
 
+
+RUN echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
+    echo "export HDFS_DATANODE_USER=root" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
+    echo "export HDFS_NAMENODE_USER=root" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
+    echo "export HDFS_SECONDARYNAMENODE_USER=root" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
+    echo "export HADOOP_PID_DIR=${HADOOP_HOME}/pids" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
+    echo "export YARN_RESOURCEMANAGER_USER=root" >> $HADOOP_HOME/etc/hadoop/yarn-env.sh && \
+    echo "export YARN_NODEMANAGER_USER=root" >> $HADOOP_HOME/etc/hadoop/yarn-env.sh
+
+
+
 # hadoop log folder
 RUN mkdir -p /usr/local/hadoop-$HADOOP_VERSION/logs
+
+RUN mkdir -pv $HADOOP_HOME/dfs
+RUN mkdir -pv $HADOOP_HOME/dfs/name
+RUN mkdir -pv $HADOOP_HOME/dfs/data
+
+ENV PATH $HADOOP_PREFIX/bin/:$PATH
+
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod a+x /entrypoint.sh && \
+    ln -s $HADOOP_HOME/etc/hadoop /etc/hadoop
+
+CMD ["/entrypoint.sh"]
