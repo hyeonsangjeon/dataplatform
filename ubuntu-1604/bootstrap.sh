@@ -5,7 +5,7 @@
 
 
 #CREATE USER
-if [ ! -z $USER  -a  $USER != root ]; then
+if [ ! -z $USER ] && [  $USER != root ]; then
     adduser --disabled-password --gecos ""  "$USER" > /dev/null
     usermod -aG sudo "$USER" > /dev/null
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
