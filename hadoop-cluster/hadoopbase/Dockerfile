@@ -87,4 +87,11 @@ ADD entrypoint.sh /entrypoint.sh
 RUN chmod a+x /entrypoint.sh && \
     ln -s $HADOOP_HOME/etc/hadoop /etc/hadoop
 
-ENTRYPOINT  ["sh","-c","/entrypoint.sh"]
+
+ADD run.sh /run.sh
+RUN chmod a+x /run.sh
+
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/bin/bash","-c","/run.sh"]
+

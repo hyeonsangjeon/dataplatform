@@ -3,6 +3,45 @@
 # Set some sensible defaults
 export CORE_CONF_fs_defaultFS=${CORE_CONF_fs_defaultFS:-hdfs://`hostname -f`:9000}
 
+
+#[Cluster worker file setting]####################################################################
+##Depending on whether Hadoop is single mode or cluster mode changing hadoop worker conf file.
+##Single mode : $WORKER_NODE environment variable no exists.
+##Cluster mode : $WORKER_NODE environment variable exists.
+WORKERS_FILE="\$HADOOP_HOME/etc/hadoop/workers"
+
+if [ -n "$WORKER_NODE" ]; then
+  addWorkers $WORKERS_FILE $WORKER_NODE
+fi
+
+function addWorkers(){
+  local path=$1
+  local workers=$2
+  local value
+
+  sed -i "s/localhost//g;" $path
+  value=`echo $workers | perl -pe 's/,/ /g;'`
+  echo -e $value > $path
+  sed -i "s/ /\r\n/g;" $path
+
+}
+
+
+
+
+#[hadoop config file setting]######################################################################
+# core-site.xml
+# hdfs-site.xml
+# yarn-site.xml
+# httpfs-site.xml
+# kms-site.xml
+# mapred-site.xml
+# Special characters in environment variables are converted as follows.
+# ___ -> -
+# __  -> @
+# _   -> .
+# @   -> _
+
 function addProperty() {
   local path=$1
   local name=$2
@@ -114,15 +153,6 @@ do
     wait_for_it ${i}
 done
 
-#수정필요
-namedir=`echo $HDFS_CONF_dfs_namenode_name_dir | perl -pe 's#file://##'`
-
-if [ "`ls -A $namedir --ignore='lost+found'`" == "" ]; then
-  echo "Formatting namenode name directory: $namedir"
-  $HADOOP_PREFIX/bin/hdfs --config $HADOOP_CONF_DIR namenode -format -nonInteractive -force $CLUSTER_NAME
-fi
-
-$HADOOP_PREFIX/bin/hdfs --config $HADOOP_CONF_DIR namenode
 
 exec $@
 

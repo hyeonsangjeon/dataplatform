@@ -4,6 +4,7 @@
 # EX: docker run  -e USER=groot  USER_PW=iamuser
 
 
+ echo "COME LANE CHANGE"
 #CREATE USER
 if [ ! -z $USER ] && [  $USER != root ]; then
     echo "COME 0000000"
