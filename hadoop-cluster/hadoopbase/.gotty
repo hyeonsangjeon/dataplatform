@@ -8,11 +8,11 @@ port = "7777"
 // permit_write = false
 
 // [bool] Enable basic authentication
-enable_basic_auth = true
+// enable_basic_auth = true
 
 // [string] Default username and password of basic authentication (user:pass)
 //          To enable basic authentication, set `true` to `enable_basic_auth`
-credential = "root:1234"
+// credential = "user:password"
 
 // [bool] Enable random URL generation
 // enable_random_url = false
