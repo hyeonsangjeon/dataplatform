@@ -1,0 +1,25 @@
+version: "2"
+services:
+  master:
+    image: modenaf360/hadoop-3.2:latest
+    container_name: master
+    hostname: master
+    volumes:
+      - /dockershare/master:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+      - NODE_TYPE=namenode
+      - GOTTY_ID=modenaf360
+      - GOTTY_PW=1234
+    env_file:
+      - ./hadoop.env
+    ports:
+      - 8989:7777
+      - 50070:50070/tcp
+      - 8042:8042/tcp
+      - 8085:8080/tcp
+      - 8985:8085/tcp
+      - 8088:8088/tcp
+      - 9000:9000/tcp
+      - 8025:8025/tcp
+      - 19888:19888/tcp
