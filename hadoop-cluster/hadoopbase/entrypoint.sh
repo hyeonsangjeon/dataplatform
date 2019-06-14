@@ -8,11 +8,7 @@ export CORE_CONF_fs_defaultFS=${CORE_CONF_fs_defaultFS:-hdfs://`hostname -f`:900
 ##Depending on whether Hadoop is single mode or cluster mode changing hadoop worker conf file.
 ##Single mode : $WORKER_NODE environment variable no exists.
 ##Cluster mode : $WORKER_NODE environment variable exists.
-WORKERS_FILE="\$HADOOP_HOME/etc/hadoop/workers"
-
-if [ -n "$WORKER_NODE" ]; then
-  addWorkers $WORKERS_FILE $WORKER_NODE
-fi
+WORKERS_FILE="$HADOOP_HOME/etc/hadoop/workers"
 
 function addWorkers(){
   local path=$1
@@ -23,9 +19,12 @@ function addWorkers(){
   value=`echo $workers | perl -pe 's/,/ /g;'`
   echo -e $value > $path
   sed -i "s/ /\r\n/g;" $path
-
+  perl -pi -e "s/\015//g" $path
 }
 
+if [ -n "$WORKER_NODE" ]; then
+  addWorkers $WORKERS_FILE $WORKER_NODE
+fi
 
 
 
@@ -152,8 +151,6 @@ for i in ${SERVICE_PRECONDITION[@]}
 do
     wait_for_it ${i}
 done
-
-#service ssh start
 
 exec $@
 
