@@ -60,7 +60,6 @@ ENV HADOOP_MAPRED_HOME=$HADOOP_HOME
 ENV HADOOP_YARN_HOME=$HADOOP_HOME
 ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
-ENV HADOOP_PREFIX=$HADOOP_HOME
 
 
 
@@ -69,10 +68,11 @@ RUN echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh 
     echo "export HDFS_NAMENODE_USER=root" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
     echo "export HDFS_SECONDARYNAMENODE_USER=root" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
     echo "export HADOOP_PID_DIR=${HADOOP_HOME}/pids" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
+    echo "export HADOOP_LOG_DIR=${HADOOP_HOME}/logs" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
     echo "export YARN_RESOURCEMANAGER_USER=root" >> $HADOOP_HOME/etc/hadoop/yarn-env.sh && \
     echo "export YARN_NODEMANAGER_USER=root" >> $HADOOP_HOME/etc/hadoop/yarn-env.sh
 
-
+ENV HADOOP_LOG_DIR=${HADOOP_HOME}/logs
 
 # hadoop log folder
 RUN mkdir -p /usr/local/hadoop-$HADOOP_VERSION/logs
@@ -81,15 +81,28 @@ RUN mkdir -pv $HADOOP_HOME/dfs
 RUN mkdir -pv $HADOOP_HOME/dfs/name
 RUN mkdir -pv $HADOOP_HOME/dfs/data
 
-ENV PATH $HADOOP_PREFIX/bin/:$PATH
+ENV PATH $HADOOP_HOME/bin/:$PATH
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod a+x /entrypoint.sh && \
     ln -s $HADOOP_HOME/etc/hadoop /etc/hadoop
 
 
+
+ENV GOTTY_TAG_VER v1.0.1
+RUN apt-get -y update && \
+    apt-get install -y curl && \
+    curl -sLk https://github.com/yudai/gotty/releases/download/${GOTTY_TAG_VER}/gotty_linux_amd64.tar.gz \
+    | tar xzC /usr/local/bin && \
+    apt-get purge --auto-remove -y curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists*
+
 ADD run.sh /run.sh
 RUN chmod a+x /run.sh
+
+
+ADD .gotty /root/.gotty
 
 
 ENTRYPOINT ["/entrypoint.sh"]

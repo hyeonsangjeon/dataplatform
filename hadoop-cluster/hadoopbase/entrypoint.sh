@@ -153,6 +153,7 @@ do
     wait_for_it ${i}
 done
 
+#service ssh start
 
 exec $@
 

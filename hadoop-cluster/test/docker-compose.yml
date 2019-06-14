@@ -9,6 +9,34 @@ services:
       - ./hadoop_master:/hadoop/dfs/name
     environment:
       - CLUSTER_NAME=test
+      - WORKER_NODE=slave1,slave2
     env_file:
       - ./hadoop.env
+    ports:
+      - 8989:7777
+    depends_on:
+      - slave1
+      - slave2
+  slave1:
+      image: modenaf360/hadoop-base:latest
+      container_name: slave1
+      hostname: slave1
+      volumes:
+        - ./hadoop_slave1:/hadoop/dfs/data
+      env_file:
+        - ./hadoop.env
+      stdin_open: true
+      tty: true
+      privileged: true
 
+  slave2:
+    image: modenaf360/hadoop-base:latest
+    container_name: slave2
+    hostname: slave2
+    volumes:
+      - ./hadoop_slave2:/hadoop/dfs/data
+    env_file:
+      - ./hadoop.env
+    stdin_open: true
+    tty: true
+    privileged: true
