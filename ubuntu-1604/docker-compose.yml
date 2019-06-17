@@ -3,9 +3,10 @@ services:
   ubuntu1:
     image: modenaf360/ubuntu-1604:latest
     hostname: ubuntu1
-#    environment:
-#      USER: 'jhs'
-#      USER_PW: '1234'
+    container_name: ubuntu1
+    environment:
+      USER: 'groot'
+      USER_PW: 'iamgroot'
     stdin_open: true
     tty: true
     cpu_shares: 1024
@@ -13,9 +14,10 @@ services:
   ubuntu2:
     image: modenaf360/ubuntu-1604:latest
     hostname: ubuntu2
-#    environment:
-#      USER: 'jhs'
-#      USER_PW: '1234'
+    container_name: ubuntu2
+    environment:
+      USER: 'groot'
+      USER_PW: 'iamgroot'
     stdin_open: true
     tty: true
     cpu_shares: 1024
