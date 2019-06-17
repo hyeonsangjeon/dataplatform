@@ -5,7 +5,7 @@ services:
     container_name: master
     hostname: master
     volumes:
-      - /dockershare/master:/hadoop/dfs/name
+      - ./masterdata:/hadoop/dfs/name
     environment:
       - CLUSTER_NAME=test
       - WORKER_NODE=slave1,slave2
@@ -36,7 +36,7 @@ services:
     container_name: slave1
     hostname: slave1
     volumes:
-      - /dockershare/slave1:/hadoop/dfs/name
+      - ./datanode1:/hadoop/dfs/name
     env_file:
       - ../../hadoop.env
     stdin_open: true
@@ -49,7 +49,7 @@ services:
     container_name: slave2
     hostname: slave2
     volumes:
-      - /dockershare/slave2:/hadoop/dfs/data
+      - ./datanode2:/hadoop/dfs/data
     env_file:
       - ../../hadoop.env
     stdin_open: true

@@ -5,7 +5,8 @@ services:
     container_name: master
     hostname: master
     volumes:
-      - /dockershare/master:/hadoop/dfs/name
+      - ./masterdata:/hadoop/dfs/name
+      - ./datanode:/hadoop/dfs/data
     environment:
       - CLUSTER_NAME=test
       - NODE_TYPE=namenode
