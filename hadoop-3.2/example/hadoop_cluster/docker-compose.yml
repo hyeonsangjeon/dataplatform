@@ -13,7 +13,7 @@ services:
       - GOTTY_ID=modenaf360
       - GOTTY_PW=1234
     env_file:
-      - ./hadoop.env
+      - ../../hadoop.env
     ports:
       - 8989:7777/tcp
       - 50070:50070/tcp
@@ -38,7 +38,7 @@ services:
     volumes:
       - /dockershare/slave1:/hadoop/dfs/name
     env_file:
-      - ./hadoop.env
+      - ../../hadoop.env
     stdin_open: true
     tty: true
     privileged: true
@@ -51,7 +51,7 @@ services:
     volumes:
       - /dockershare/slave2:/hadoop/dfs/data
     env_file:
-      - ./hadoop.env
+      - ../../hadoop.env
     stdin_open: true
     tty: true
     privileged: true

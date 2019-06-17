@@ -12,7 +12,7 @@ services:
       - GOTTY_ID=modenaf360
       - GOTTY_PW=1234
     env_file:
-      - ./hadoop.env
+      - ../../hadoop.env
     ports:
       - 8989:7777
       - 50070:50070/tcp
