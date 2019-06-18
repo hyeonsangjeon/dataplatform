@@ -58,7 +58,7 @@ docker-compose -f ./example/tasknode/docker-compose.yml up -d
 
 ### All node has Gotty Web Terminal 
 The gotty browser terminal can be used for account configuration and can be used without validation check if the GOTTY_ID and GOTTY_PW environment variables are not set.
-
+* gotty is using port internal : 7777
 ![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/gotty_terminal_include.png)
 
 
