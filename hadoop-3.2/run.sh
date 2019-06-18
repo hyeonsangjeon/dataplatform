@@ -19,7 +19,6 @@ if [[ "$NODE_TYPE" = "namenode" ]]; then
     /usr/local/hadoop/sbin/start-yarn.sh
     sleep 5
     /usr/local/hadoop/sbin/mr-jobhistory-daemon.sh start historyserver
-
 fi
 
 
