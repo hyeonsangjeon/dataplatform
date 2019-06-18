@@ -3,7 +3,9 @@ This docker uses Hadoop version 3.2.0.
 * This docker hadoop includes a protocol buffer to support the binary format.
 (In the serialization process, Hadoop transfers data in two ways: Text format / Binary format. When the data type between servers is wrong, data developed in different languages ​​is transmitted.)
 
-* This Hadoop image based on ubuntu Linux ver.1604 
+* This Hadoop image based on ubuntu Linux ver.1604
+* In cluster mode, it is possible to add a tasknode that is activated only by nodemanager.
+* All Hadoop cluster nodes have a gotty browser terminal for work.
 * A Hadoop cluster created with this image has the same rsa key in the root account. ssh port 22 
 
 * The entrypoint.sh of the Hadoop Docker image was referenced in [big-data-europe/docker-hadoop](https://github.com/big-data-europe/docker-hadoop). 
