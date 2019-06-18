@@ -49,7 +49,7 @@ Tasknode has only nodemanager enabled and is automatically joined to the yarn as
 After check active node of the TaskNode UI and Use it. 
 
 !! If the orchestration does not have a different hostname and you scale out the same container, additional testing is required.
-![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/gotty_terminal_include.png)
+![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/tasknode_scaleout.png)
 ```shell
 docker-compose -f ./example/tasknode/docker-compose.yml up -d
 ``` 
