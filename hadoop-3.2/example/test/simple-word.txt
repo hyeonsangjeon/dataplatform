@@ -1,0 +1,9 @@
+cat
+dog
+cat
+dog
+tiger
+tiger
+rabbit
+cat
+cat
