@@ -32,34 +32,36 @@ There are many Linux environment variables to use as a Hadoop environment file i
 |-e TZ           |take it to user country, linux environment variables                                   |
 
 
-####1. Hadoop Single Mode
+### 1. Hadoop Single Mode
 ```shell
 docker-compose -f example/hadoop_singlemode/node-compose.yml up -d 
 ```
-####2. Hadoop Cluster Mode
+### 2. Hadoop Cluster Mode
 master (namenode) is installed with all master related applications except datanode and node manager, and only node manager and datanode are allocated to datanode. 
 If you are using a single PC, such as a synology, set each data node to a different disk volume.Reduces shuffling disk IO for MR operations.
 ```shell
 docker-compose -f example/hadoop_cluster/node-compose.yml up -d 
 ```
 
-####3. Dynamic TaskNode ScaleOut
+### 3. Dynamic TaskNode ScaleOut
 You can add a TaskNode using hadoop.env, which is the same as the endpoint setting of a resource manager in an existing Hadoop cluster.
 Tasknode has only nodemanager enabled and is automatically joined to the yarn as the resourcemanager endpoint in the same Hadoop environment file. 
 After check active node of the TaskNode UI and Use it. 
 
 !! If the orchestration does not have a different hostname and you scale out the same container, additional testing is required.
+![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/gotty_terminal_include.png)
 ```shell
 docker-compose -f ./example/tasknode/docker-compose.yml up -d
 ``` 
 
-#### All node has Gotty Web Terminal 
+### All node has Gotty Web Terminal 
 The gotty browser terminal can be used for account configuration and can be used without validation check if the GOTTY_ID and GOTTY_PW environment variables are not set.
 
+![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/gotty_terminal_include.png)
 
 
 
-#### Configure Environment Variables
+### Configure Environment Variables
 * The dynamically configurable Hadoop environment file is shown below.
 - core-site.xml
 - hdfs-site.xml
@@ -68,7 +70,7 @@ The gotty browser terminal can be used for account configuration and can be used
 - kms-site.xml
 - mapred-site.xml
 
-##### Special characters in environment variables are converted as follows.
+#### Special characters in environment variables are converted as follows.
 * ___  :  -
 * __   :  @
 * _    :  .
@@ -86,9 +88,12 @@ YARN_CONF_ : yarn-site.xml
 
 In hadoop.env, the information to change depends on the user setting.
 The memory settings of map reduce are set as follows, 
+
 ```shell
 mapreduce.map.memory.mb + mapreduce.reduce.memory.mb + yarn.app.mapreduce.am.resource.mb < yarn.scheduler.maximum-allocation-mb < yarn.nodemanager.resource.memory-mb
 ```
+![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/hadoop_memory_setting.png)
+
 
 * modify it.
 ```text
