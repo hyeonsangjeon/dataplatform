@@ -36,13 +36,13 @@ There are many Linux environment variables to use as a Hadoop environment file i
 
 ### 1. Hadoop Single Mode
 ```shell
-docker-compose -f example/hadoop_singlemode/node-compose.yml up -d 
+docker-compose -f example/hadoop_singlemode/docker-compose.yml up -d 
 ```
 ### 2. Hadoop Cluster Mode
 master (namenode) is installed with all master related applications except datanode and node manager, and only node manager and datanode are allocated to datanode. 
 If you are using a single PC, such as a synology, set each data node to a different disk volume.Reduces shuffling disk IO for MR operations.
 ```shell
-docker-compose -f example/hadoop_cluster/node-compose.yml up -d 
+docker-compose -f example/hadoop_cluster/docker-compose.yml up -d 
 ```
 
 ### 3. Dynamic TaskNode ScaleOut
