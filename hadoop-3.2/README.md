@@ -14,3 +14,14 @@ This docker uses Hadoop version 3.2.0.
 
 #### Order of linkage of the image layer to the docker
 ubuntu-1604 > hadoop-base > hadoop
+
+
+### How to use
+
+#### Hadoop Single Mode
+
+#### Hadoop Cluster Mode
+
+
+
+#### Configure Environment Variables
