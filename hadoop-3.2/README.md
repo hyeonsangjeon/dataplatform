@@ -50,7 +50,7 @@ Tasknode has only nodemanager enabled and is automatically joined to the yarn as
 After check active node of the TaskNode UI and Use it. 
 
 !! If the orchestration does not have a different hostname and you scale out the same container, additional testing is required.
-![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/tasknode_scaleout.png)
+![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/tasknode_scaleout.png?raw=true)
 ```shell
 docker-compose -f ./example/tasknode/docker-compose.yml up -d
 ``` 
@@ -58,7 +58,7 @@ docker-compose -f ./example/tasknode/docker-compose.yml up -d
 ### All node has Gotty Web Terminal 
 The gotty browser terminal can be used for account configuration and can be used without validation check if the GOTTY_ID and GOTTY_PW environment variables are not set.
 * gotty is using port internal : 7777
-![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/gotty_terminal_include.png)
+![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/gotty_terminal_include.png?raw=true)
 
 
 
@@ -93,7 +93,7 @@ The memory settings of map reduce are set as follows,
 ```shell
 mapreduce.map.memory.mb + mapreduce.reduce.memory.mb + yarn.app.mapreduce.am.resource.mb < yarn.scheduler.maximum-allocation-mb < yarn.nodemanager.resource.memory-mb
 ```
-![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/hadoop_memory_setting.png)
+![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/hadoop_memory_setting.png?raw=true)
 
 
 * modify it.
