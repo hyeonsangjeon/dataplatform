@@ -2,6 +2,7 @@
 This docker uses Hadoop version 3.2.0. 
 * This docker hadoop includes a protocol buffer to support the binary format.
 (In the serialization process, Hadoop transfers data in two ways: Text format / Binary format. When the data type between servers is wrong, data developed in different languages ​​is transmitted.)
+https://cloud.docker.com/repository/docker/modenaf360/hadoop-3.2
 
 * This Hadoop image based on ubuntu Linux ver.1604
 * In cluster mode, it is possible to add a tasknode that is activated only by nodemanager.
