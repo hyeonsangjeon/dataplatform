@@ -2,7 +2,6 @@ version: "2"
 services:
   tasknode:
     image: modenaf360/hadoop-tasknode:latest
-    container_name: tasknode
     environment:
       - CLUSTER_NAME=test
     env_file:

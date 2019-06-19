@@ -52,12 +52,28 @@ If you are using a single PC, such as a synology, set each data node to a differ
 docker-compose -f example/hadoop_cluster/docker-compose.yml up -d 
 ```
 
+
+### 2-1 In docker orchestration tool 
+- Some docker orchestration tools that directly handle the docker overlay network(like Rancher with IPSec) sometimes fail to find the ip for the hostname in the dfs communication.
+In this error case, add hdfs-site option
+"dfs.namenode.datanode.registration.ip-hostname-check => false"
+
+
+* error case : "Datanode denied communication with namenode because hostname cannot be resolved"
+https://community.cloudera.com/t5/Cloudera-Manager-Installation/Datanode-denied-communication-with-namenode/td-p/69051  
+```text
+HDFS_CONF_dfs_namenode_datanode_registration_ip___hostname___check=false
+```
+
+ 
+ 
+
 ### 3. Dynamic TaskNode ScaleOut
 You can add a TaskNode using hadoop.env, which is the same as the endpoint setting of a resource manager in an existing Hadoop cluster.
 Tasknode has only nodemanager enabled and is automatically joined to the yarn as the resourcemanager endpoint in the same Hadoop environment file. 
 After check active node of the TaskNode UI and Use it. 
 
-!! If the orchestration does not have a different hostname and you scale out the same container, additional testing is required.
+
 ![screenshot1](https://github.com/hyeonsangjeon/dataplatform/blob/master/hadoop-3.2/example/pic/tasknode_scaleout.png?raw=true)
 ```shell
 docker-compose -f ./example/tasknode/docker-compose.yml up -d
