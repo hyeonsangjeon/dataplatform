@@ -34,6 +34,12 @@ There are many Linux environment variables to use as a Hadoop environment file i
 |-e GOTTY_PW           |gotty login password, linux environment variables ,  do not use start character   '!' '$' '&'                                  |
 |-e TZ           |take it to user country, linux environment variables                                   |
 
+### 0. Making bridge overlay network
+For example, create a network named 'hadoop_cluster_default'.
+```shell
+docker network create -d bridge hadoop_cluster_default
+docker network ls
+```
 
 ### 1. Hadoop Single Mode
 ```shell

@@ -30,6 +30,7 @@ services:
     links:
       - slave1:slave1
       - slave2:slave2
+    network_mode: hadoop_cluster_default
 
   slave1:
     image: modenaf360/hadoop-3.2:latest
@@ -42,6 +43,7 @@ services:
     stdin_open: true
     tty: true
     privileged: true
+    network_mode: hadoop_cluster_default
 
 
   slave2:
@@ -55,3 +57,4 @@ services:
     stdin_open: true
     tty: true
     privileged: true
+    network_mode: hadoop_cluster_default
