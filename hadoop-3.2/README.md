@@ -56,7 +56,6 @@ docker-compose -f example/hadoop_cluster/docker-compose.yml up -d
 In this error case, add hdfs-site option
 "dfs.namenode.datanode.registration.ip-hostname-check => false"
 
-
 * error case : "Datanode denied communication with namenode because hostname cannot be resolved"
 https://community.cloudera.com/t5/Cloudera-Manager-Installation/Datanode-denied-communication-with-namenode/td-p/69051  
 ```text
