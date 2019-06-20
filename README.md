@@ -8,6 +8,7 @@ https://cloud.docker.com/repository/docker/modenaf360/hadoop-3.2
 * In cluster mode, it is possible to add a tasknode that is activated only by nodemanager.
 * All Hadoop cluster nodes have a gotty browser terminal for work.
 * A Hadoop cluster created with this image has the same rsa key in the root account. ssh port 22 
+* All Hadoop applications run in the background. You can stop, restart, and start the Hadoop application again in the container after the launch of the docker.
 
 * The entrypoint.sh of the Hadoop Docker image was referenced in [big-data-europe/docker-hadoop](https://github.com/big-data-europe/docker-hadoop). 
 
