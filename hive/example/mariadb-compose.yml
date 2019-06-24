@@ -1,0 +1,27 @@
+version: '2'
+services:
+  hive-mariadb:
+    image: mariadb:10.3.10
+    hostname: hive-mariadb
+    container_name: hive-mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: '1234'
+      MYSQL_USER: 'hive'
+      MYSQL_PASSWORD: 'hive'
+      MYSQL_DATABASE: 'hive'
+      TZ : 'Asia/Seoul'
+    ports:
+    - 3306:3306/tcp
+    volumes:
+    - ../mysql_meta_schema/mariadb:/var/lib/mysql
+    - ../mysql_meta_schema:/docker-entrypoint-initdb.d
+    command:
+      --character-set-server=utf8
+      --collation-server=utf8_general_ci
+      --max-allowed-packet=256M
+      --wait_timeout=28800
+      --net-buffer-length=1048576
+    stdin_open: true
+    tty: true
+    privileged: true
+    network_mode: hadoop_cluster_default
