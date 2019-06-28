@@ -6,8 +6,11 @@ namedir=`echo $HDFS_CONF_dfs_namenode_name_dir | perl -pe 's#file://##'`
 
 ##Namenode running control & init hdfs format
 if [[ "$NODE_TYPE" = "namenode" ]]; then
-    ##when first container up, hdfs format run
+    ##when first container up, hdfs format run and timeline dir in namenode
     if [ "`ls -A $namedir --ignore='lost+found'`" == "" ]; then
+
+        mkdir -p /hadoop/yarn/timeline
+
         echo "Formatting namenode name directory: $namedir"
         $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR namenode -format -nonInteractive -force $CLUSTER_NAME
     else
@@ -15,10 +18,12 @@ if [[ "$NODE_TYPE" = "namenode" ]]; then
     fi
 
     /usr/local/hadoop/sbin/start-dfs.sh
-    sleep 30
+    sleep 25
     /usr/local/hadoop/sbin/start-yarn.sh
     sleep 5
-    /usr/local/hadoop/sbin/mr-jobhistory-daemon.sh start historyserver
+    mapred --daemon start historyserver
+    sleep 5
+    yarn --daemon start timelineserver
 fi
 
 
