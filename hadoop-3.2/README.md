@@ -117,6 +117,8 @@ mapreduce.map.memory.mb + mapreduce.reduce.memory.mb + yarn.app.mapreduce.am.res
 
 
 * modify it.
+* You can also refer to EMR resource information for settings.
+https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hadoop-task-config.html
 ```text
 CORE_CONF_fs_defaultFS=hdfs://master:9000
 YARN_CONF_yarn_nodemanager_resource_cpu___vcores=2
