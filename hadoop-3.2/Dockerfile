@@ -8,6 +8,8 @@ ENV HDFS_CONF_dfs_namenode_name_dir=$HADOOP_HOME/dfs/name
 ENV HDFS_CONF_dfs_datanode_data_dir=$HADOOP_HOME/dfs/data
 RUN ln -s $HADOOP_HOME/dfs /dfs
 
+COPY ./example/test /test
+RUN chmod +x /test/*
 ADD run.sh /run.sh
 RUN chmod a+x /run.sh
 
