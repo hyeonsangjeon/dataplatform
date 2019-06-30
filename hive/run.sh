@@ -1,9 +1,9 @@
 #!/bin/bash
 
-hadoop fs -mkdir       /tmp
-hadoop fs -mkdir -p    /user/hive/warehouse
-hadoop fs -chmod g+w   /tmp
-hadoop fs -chmod g+w   /user/hive/warehouse
+hdfs dfs -mkdir       /tmp
+hdfs dfs -mkdir -p    /user/hive/warehouse
+hdfs dfs -chmod g+w   /tmp
+hdfs dfs -chmod g+w   /user/hive/warehouse
 
 hive --service metastore &
 

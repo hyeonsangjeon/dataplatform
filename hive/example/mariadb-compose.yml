@@ -1,5 +1,25 @@
 version: '2'
 services:
+  hive:
+    image: modenaf360/mariadb-hive
+    hostname: hive
+    container_name: hive
+    environment:
+      HIVE_SITE_CONF_javax_jdo_option_ConnectionURL: 'jdbc:mysql://hive-mariadb:3306/hivemetastore?createDatabaseIfnotExists=true'
+      HIVE_SITE_CONF_javax_jdo_option_ConnectionUserName: 'hive'
+      HIVE_SITE_CONF_javax_jdo_option_ConnectionPassword: '1234'
+    ports:
+    - 10000:10000/tcp
+    - 9083:9083/tcp
+    stdin_open: true
+    tty: true
+    privileged: true
+    network_mode: hadoop_cluster_default
+    env_file:
+      - ../hadoop-hive.env
+    depends_on:
+      - hive-mariadb
+
   hive-mariadb:
     image: mariadb:10.3.10
     hostname: hive-mariadb
@@ -7,14 +27,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: '1234'
       MYSQL_USER: 'hive'
-      MYSQL_PASSWORD: 'hive'
-      MYSQL_DATABASE: 'hive'
-      TZ : 'Asia/Seoul'
+      MYSQL_PASSWORD: '1234'
+      MYSQL_DATABASE: 'hivemetastore'
     ports:
     - 3306:3306/tcp
-    volumes:
-    - ../mysql_meta_schema/mariadb:/var/lib/mysql
-    - ../mysql_meta_schema:/docker-entrypoint-initdb.d
     command:
       --character-set-server=utf8
       --collation-server=utf8_general_ci

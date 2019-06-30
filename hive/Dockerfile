@@ -3,17 +3,17 @@ LABEL maintainer="wingnut0310 <wingnut0310@gmail.com>"
 
 ENV HIVE_VERSION 2.3.5
 ENV MYSQL_CONN_VER 8.0.16
-ENV HADOOP_HOME=/usr/local/hadoop
+ENV HADOOP_HOME /usr/local/hadoop
 ENV HIVE_HOME /usr/local/hive
+ENV PATH $HIVE_HOME/bin:$PATH
 
-WORKDIR /usr/local
 
 # HIVE 2.3.5 with mysql metastore JDBC
 RUN apt-get update && apt-get install -y wget procps && \
     wget https://archive.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz && \
     tar -xzvf apache-hive-$HIVE_VERSION-bin.tar.gz && \
-    mv apache-hive-$HIVE_VERSION-bin hive && \
-    wget http://repo.maven.apache.org/maven2/mysql/mysql-connector-java/$MYSQL_CONN_VER/mysql-connector-java-$MYSQL_CONN_VER.jar -o $HIVE_HOME/lib/mysql-connector-java-$MYSQL_CONN_VER.jar && \
+    mv apache-hive-$HIVE_VERSION-bin $HIVE_HOME && \
+    wget http://repo.maven.apache.org/maven2/mysql/mysql-connector-java/$MYSQL_CONN_VER/mysql-connector-java-$MYSQL_CONN_VER.jar -O $HIVE_HOME/lib/mysql-connector-java-$MYSQL_CONN_VER.jar && \
     rm apache-hive-$HIVE_VERSION-bin.tar.gz && \
     apt-get --purge remove -y wget && \
     apt-get clean && \
@@ -40,6 +40,7 @@ RUN ln -s $HIVE_HOME/etc/hadoop /etc/hive && \
 
 
 EXPOSE 10000
+EXPOSE 10002
 
 ADD run.sh /run.sh
 RUN chmod a+x /run.sh
