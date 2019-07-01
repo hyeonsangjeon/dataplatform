@@ -1,7 +1,7 @@
 version: '2'
 services:
   hive:
-    image: modenaf360/mariadb-hive
+    image: modenaf360/hive
     hostname: hive
     container_name: hive
     environment:
