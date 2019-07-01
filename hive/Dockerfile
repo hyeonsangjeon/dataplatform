@@ -9,7 +9,7 @@ ENV PATH $HIVE_HOME/bin:$PATH
 
 
 # HIVE 2.3.5 with mysql metastore JDBC
-RUN apt-get update && apt-get install -y wget procps && \
+RUN apt-get update && apt-get install -y wget procps netcat && \
     wget https://archive.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz && \
     tar -xzvf apache-hive-$HIVE_VERSION-bin.tar.gz && \
     mv apache-hive-$HIVE_VERSION-bin $HIVE_HOME && \
@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y wget procps && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN chown root:staff $HIVE_HOME/lib/mysql-connector-java-$MYSQL_CONN_VER.jar
 
 RUN mkdir -p /log_data/hive && \
     mkdir -p /log_data/llap
@@ -33,9 +34,10 @@ ADD conf/hive-log4j2.properties $HIVE_HOME/conf
 ADD conf/ivysettings.xml $HIVE_HOME/conf
 ADD conf/llap-daemon-log4j2.properties $HIVE_HOME/conf
 
-RUN ln -s $HIVE_HOME/etc/hadoop /etc/hive && \
-    ln -s $HIVE_HOME /hive && \
+RUN ln -s $HIVE_HOME/conf /etc/hive && \
+    ln -s $HIVE_HOME      /hive && \
     ln -s $HIVE_HOME/conf /hiveconfig
+
 
 
 
