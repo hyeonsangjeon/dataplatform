@@ -1,0 +1,19 @@
+version: '2'
+services:
+  hive:
+    image: modenaf360/mariadb-hive
+    hostname: hive
+    container_name: hive
+    environment:
+      HIVE_SITE_CONF_hive_metastore_local: 'ture'
+      DB_TYPE: 'derby'
+    ports:
+    - 10000:10000/tcp
+    - 9083:9083/tcp
+    stdin_open: true
+    tty: true
+    privileged: true
+    network_mode: hadoop_cluster_default
+    env_file:
+      - ../hadoop-hive.env
+
