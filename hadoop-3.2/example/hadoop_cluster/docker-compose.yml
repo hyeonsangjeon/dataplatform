@@ -23,6 +23,7 @@ services:
       - 8088:8088/tcp
       - 9000:9000/tcp
       - 8031:8031/tcp
+      - 8188:8188/tcp
       - 19888:19888/tcp
     depends_on:
       - slave1
