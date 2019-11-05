@@ -1,0 +1,12 @@
+version: "2"
+services:
+  master:
+    image: modenaf360/jupyter-notebook:latest
+    container_name: jupyter
+    hostname: jupyter
+    environment:
+      - USER_PASSWD=hello1234
+    env_file:
+      - ../../hadoop-3.2/hadoop.env
+    ports:
+      - 12345:8888
